@@ -1,0 +1,39 @@
+name: Build Android APK
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:z
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: 📥 检出代码
+      uses: actions/checkout@v3
+
+    - name: 🔧 设置 Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: 📦 构建 Android APK
+      uses: ArtemSBulgakov/buildozer-action@v1
+      id: buildozer
+      with:
+        command: buildozer android debug
+        buildozer_version: stable
+
+    - name: ✅ 上传 APK
+      uses: actions/upload-artifact@v3
+      with:
+        name: WordHighlighter-APK
+        path: bin/*.apk
+        
+    - name: 📊 显示构建信息
+      run: |
+        echo "✅ 构建完成！"
+        ls -lh bin/*.apk || echo "未找到 APK"
