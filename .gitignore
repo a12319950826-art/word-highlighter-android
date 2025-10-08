@@ -1,0 +1,24 @@
+# Buildozer 构建文件
+.buildozer/
+bin/
+*.pyc
+__pycache__/
+
+# Python
+*.egg-info/
+dist/
+build/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# 临时文件
+*.log
+*.tmp
